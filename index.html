@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeissy Moda</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f2f7;
+      color: #35152f;
+    }
+
+    header {
+      background: #4a1942;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    nav {
+      background: #ead2e5;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav a {
+      color: #4a1942;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 10px;
+    }
+
+    .banner {
+      text-align: center;
+      padding: 55px 20px;
+      background: linear-gradient(135deg, #ead2e5, #f9e8f1);
+    }
+
+    .banner h2 {
+      font-size: 30px;
+    }
+
+    button {
+      background: #7c326b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 13px 22px;
+      margin: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #4a1942;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 25px 15px;
+    }
+
+    .colecoes, .produtos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      padding: 18px;
+      border-radius: 12px;
+      text-align: center;
+      width: 260px;
+      box-shadow: 0 3px 12px #00000012;
+    }
+
+    .foto {
+      font-size: 75px;
+      background: #f3e4ef;
+      padding: 25px;
+      border-radius: 8px;
+    }
+
+    .preco {
+      font-weight: bold;
+      color: #7c326b;
+      font-size: 20px;
+    }
+
+    #mensagem {
+      text-align: center;
+      font-weight: bold;
+      padding: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #4a1942;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>JEISSY MODA</h1>
+    <p>Seu estilo, sua personalidade!</p>
+  </header>
+
+  <nav>
+    <a href="#inicio">Início</a>
+    <a href="#colecoes">Coleções</a>
+    <a href="#produtos">Produtos</a>
+  </nav>
+
+  <section class="banner" id="inicio">
+    <h2>Vista seu melhor estilo!</h2>
+    <p>Moda feminina e masculina em um só lugar.</p>
+    <button onclick="irParaColecoes()">
+      COMEÇAR A COMPRAR
+    </button>
+  </section>
+
+  <main>
+    <section id="colecoes">
+      <h2 style="text-align:center">Escolha sua coleção</h2>
+
+      <div class="colecoes">
+        <div class="card">
+          <div class="foto">👗</div>
+          <h3>Moda Feminina</h3>
+          <button onclick="mostrarProdutos('Feminino')">
+            VER FEMININO
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="foto">👔</div>
+          <h3>Moda Masculina</h3>
+          <button onclick="mostrarProdutos('Masculino')">
+            VER MASCULINO
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="produtos">
+      <h2 id="tituloProdutos" style="text-align:center">
+        Nossos produtos
+      </h2>
+
+      <div class="produtos" id="listaProdutos"></div>
+      <p id="mensagem"></p>
+    </section>
+
+    <section style="text-align:center; padding:25px">
+      <h2>📦 Rastrear meu pedido</h2>
+      <p>Consulte o acompanhamento do seu pedido.</p>
+      <button onclick="rastrearPedido()">
+        RASTREAR PEDIDO
+      </button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Jeissy Moda</p>
+    <p>Obrigado por visitar nossa loja!</p>
+  </footer>
+
+  <script>
+    const produtos = {
+      Feminino: [
+        { nome: "Vestido elegante", preco: 129.90, emoji: "👗" },
+        { nome: "Bolsa feminina", preco: 79.90, emoji: "👜" }
+      ],
+      Masculino: [
+        { nome: "Camisa casual", preco: 89.90, emoji: "👔" },
+        { nome: "Tênis casual", preco: 159.90, emoji: "👟" }
+      ]
+    };
+
+    function irParaColecoes() {
+      document.getElementById("colecoes")
+        .scrollIntoView({ behavior: "smooth" });
+    }
+
+    function mostrarProdutos(categoria) {
+      const lista = document.getElementById("listaProdutos");
+      const titulo = document.getElementById("tituloProdutos");
+
+      titulo.textContent = "Coleção " + categoria;
+      lista.innerHTML = "";
+
+      produtos[categoria].forEach(function(produto) {
+        lista.innerHTML += `
+          <article class="card">
+            <div class="foto">${produto.emoji}</div>
+            <h3>${produto.nome}</h3>
+            <p class="preco">
+              R$ ${produto.preco.toFixed(2).replace(".", ",")}
+            </p>
+            <button onclick="adicionar('${produto.nome}')">
+              ESCOLHER PRODUTO
+            </button>
+          </article>
+        `;
+      });
+
+      document.getElementById("mensagem").textContent = "";
+      document.getElementById("produtos")
+        .scrollIntoView({ behavior: "smooth" });
+    }
+
+    function adicionar(nome) {
+      document.getElementById("mensagem").textContent =
+        nome + " selecionado! Em breve você poderá personalizar sua peça.";
+    }
+
+    function rastrearPedido() {
+      alert("O rastreamento será disponibilizado quando a loja tiver um sistema de pedidos conectado.");
+    }
+  </script>
+</body>
+</html>
