@@ -1,217 +1,178 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jeissy Moda | Elegância em cada detalhe</title>
-<style>
-:root{--preto:#0b0b0b;--painel:#171717;--dourado:#d4af63;--creme:#f7f0e2;--cinza:#bdb8ae}
-*{box-sizing:border-box}
-body{margin:0;background:var(--preto);color:var(--creme);font-family:Arial,sans-serif}
-button,input,select{font:inherit}
-button{cursor:pointer;border:1px solid var(--dourado);background:transparent;color:var(--dourado);border-radius:4px;padding:10px 15px}
-button:hover,button.ativo{background:var(--dourado);color:#111}
-header{padding:22px 6%;border-bottom:1px solid #3c3220;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-.logo{color:var(--dourado);font-family:Georgia,serif;font-size:28px;letter-spacing:3px}
-header small{color:var(--cinza)}
-nav,.actions,.filters{display:flex;gap:10px;flex-wrap:wrap}
-main{max-width:1150px;margin:auto;padding:25px 18px 60px}
-.hero{min-height:300px;padding:45px 25px;display:flex;align-items:center;background:linear-gradient(110deg,#17130d,#302313,#111);border:1px solid #594725;border-radius:8px}
-.hero div{max-width:650px}
-.eyebrow{color:var(--dourado);letter-spacing:4px}
-h1,h2{font-family:Georgia,serif;font-weight:normal}
-h1{font-size:clamp(36px,6vw,62px);margin:12px 0}
-h2{color:var(--dourado);margin-top:35px}
-p{line-height:1.6}
-.muted,.notice{color:var(--cinza)}
-.notice{font-size:13px}
-.filters{margin:18px 0}
-input,select{min-width:0;padding:12px;border:1px solid #51442b;border-radius:4px;background:#171717;color:var(--creme)}
-.filters input{flex:1}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
-.card{background:var(--painel);border:1px solid #393124;border-radius:7px;overflow:hidden}
-.art{height:190px;display:grid;place-items:center;background:radial-gradient(ellipse,#57462a,#211b12 60%,#101010);font-size:65px}
-.card-body{padding:15px}
-.card h3{margin:5px 0 10px}
-.price{color:var(--dourado);font-size:19px}
-.card .actions button{flex:1}
-.panel{background:var(--painel);border:1px solid #51442b;border-radius:7px;padding:20px;margin-top:25px}
-.row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
-.row>*{flex:1}
-.hidden{display:none!important}
-#photoPreview{display:block;max-width:230px;max-height:300px;margin-top:15px;border-radius:6px}
-footer{text-align:center;padding:28px 15px;border-top:1px solid #393124;color:var(--cinza)}
-hr{border:0;border-top:1px solid #393124;margin:18px 0}
-@media(max-width:600px){header{align-items:flex-start}.hero{padding:30px 18px}nav button{padding:8px 10px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUXO FASHION | Moda Exclusiva</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-<header>
-  <div><div class="logo">JEISSY MODA</div><small>Elegância em cada detalhe</small></div>
-  <nav>
-    <button onclick="showSection('inicio')">Início</button>
-    <button onclick="showSection('catalogo')">Coleções</button>
-    <button onclick="showSection('provador')">Provador</button>
-    <button onclick="showSection('rastreamento')">Rastrear</button>
-    <button onclick="showSection('carrinho')">Sacola (<span id="cartCount">0</span>)</button>
-  </nav>
-</header>
-<main>
-<section id="inicio">
-  <div class="hero"><div>
-    <div class="eyebrow">NOVA COLEÇÃO</div>
-    <h1>Seu estilo.<br>Sua presença.</h1>
-    <p>Moda feminina e masculina para quem transforma cada detalhe em elegância.</p>
-    <div class="actions">
-      <button onclick="chooseCategory('Feminino')">Comprar feminino</button>
-      <button onclick="chooseCategory('Masculino')">Comprar masculino</button>
-    </div>
-  </div></div>
-  <h2>Uma experiência exclusiva</h2>
-  <p class="muted">Descubra roupas, calçados e acessórios para diferentes momentos.</p>
-  <div class="grid">
-    <div class="card"><div class="art">✦</div><div class="card-body"><h3>Estilo</h3><p class="muted">Peças para expressar sua personalidade.</p></div></div>
-    <div class="card"><div class="art">♢</div><div class="card-body"><h3>Detalhes</h3><p class="muted">Complete seu visual com acessórios.</p></div></div>
-    <div class="card"><div class="art">✧</div><div class="card-body"><h3>Descobertas</h3><p class="muted">Explore as coleções Jeissy Moda.</p></div></div>
-  </div>
-</section>
 
-<section id="catalogo" class="hidden">
-  <h1>Nosso catálogo</h1><p class="muted">Escolha uma coleção e descubra suas peças favoritas.</p>
-  <div class="filters">
-    <input id="search" placeholder="Pesquisar produto..." oninput="renderProducts()">
-    <select id="category" onchange="renderProducts()">
-      <option value="Todos">Todas as coleções</option><option>Feminino</option><option>Masculino</option><option>Acessórios</option><option>Calçados</option>
-    </select>
-    <select id="sort" onchange="renderProducts()"><option value="default">Ordenar produtos</option><option value="low">Menor preço</option><option value="high">Maior preço</option></select>
-  </div>
-  <div id="products" class="grid"></div>
-</section>
+  <header class="topo">
+    <h1>LUXO FASHION</h1>
+    <p>Elegância em cada detalhe</p>
+  </header>
 
-<section id="detalhes" class="hidden">
-  <h1>Personalize sua peça</h1>
-  <div class="panel">
-    <h2 id="detailName"></h2><p id="detailPrice" class="price"></p>
-    <div class="row">
-      <label>Cor<br><select id="detailColor"><option>Preto</option><option>Branco</option><option>Bege</option><option>Vinho</option><option>Azul</option></select></label>
-      <label>Tamanho<br><select id="detailSize"><option>PP</option><option>P</option><option selected>M</option><option>G</option><option>GG</option><option>36</option><option>38</option><option>40</option><option>42</option></select></label>
-      <label>Quantidade<br><select id="detailQty"><option>1</option><option>2</option><option>3</option></select></label>
-    </div>
-    <p><label>Altura aproximada (opcional)<br><input id="detailHeight" type="number" min="100" max="230" placeholder="Ex.: 165 cm"></label></p>
-    <p class="notice">A altura é apenas informativa e não garante o caimento da peça.</p>
-    <div class="actions"><button onclick="addToCart()">Adicionar à sacola</button><button onclick="showSection('catalogo')">Voltar ao catálogo</button></div>
-  </div>
-</section>
+  <main class="container">
 
-<section id="carrinho" class="hidden">
-  <h1>Sua sacola</h1><div id="cartItems" class="panel">Sua sacola está vazia.</div>
-  <div class="panel">
-    <label>Cupom promocional<br><input id="coupon" placeholder="Digite JEISSY10"></label>
-    <button onclick="applyCoupon()">Aplicar cupom</button><p id="couponMessage" class="notice"></p>
-    <h2 id="cartTotal">Total: R$ 0,00</h2>
-    <button onclick="showSection('checkout')">Continuar para checkout demonstrativo</button>
-  </div>
-</section>
+    <!-- 1. TELA DE ENTRADA -->
+    <section id="entrada" class="pagina ativa">
+      <h2>Bem-vinda à LUXO FASHION</h2>
+      <p>Entre para conhecer nossa coleção exclusiva.</p>
 
-<section id="checkout" class="hidden">
-  <h1>Finalização demonstrativa</h1><div class="panel">
-    <p>Esta etapa é apenas uma demonstração visual. Nenhum pagamento será realizado.</p>
-    <label>Nome para o pedido<br><input id="buyerName" autocomplete="name" placeholder="Seu nome"></label>
-    <p><label>Forma de pagamento simulada<br><select id="payment"><option>Pix demonstrativo</option><option>Cartão de crédito demonstrativo</option><option>Cartão de débito demonstrativo</option></select></label></p>
-    <p class="notice">Não informe números de cartão, senhas bancárias ou dados financeiros reais.</p>
-    <button onclick="placeDemoOrder()">Criar pedido de demonstração</button><p id="checkoutMessage"></p>
-  </div>
-</section>
+      <form id="form-entrar">
+        <label for="usuario-entrar">Nome de usuário</label>
+        <input id="usuario-entrar" type="text"
+               placeholder="Digite seu usuário" required>
 
-<section id="provador" class="hidden">
-  <h1>Provador virtual</h1><div class="panel">
-    <p>Escolha uma foto para visualizá-la nesta página. Este recurso não troca a roupa nem gera um avatar com IA.</p>
-    <label>Escolher foto (opcional)<br><input type="file" id="photoInput" accept="image/*" onchange="previewPhoto()"></label>
-    <img id="photoPreview" class="hidden" alt="Prévia da foto selecionada">
-    <p class="notice">A prévia é local nesta página. Use apenas imagens que você tem autorização para utilizar.</p>
-  </div>
-</section>
+        <label for="senha-entrar">Senha</label>
+        <input id="senha-entrar" type="password"
+               placeholder="Digite sua senha" required>
 
-<section id="rastreamento" class="hidden">
-  <h1>Rastrear pedido</h1><div class="panel">
-    <p>Digite o código criado pela demonstração nesta sessão.</p>
-    <input id="trackingCode" placeholder="Ex.: JM123456"><button onclick="trackOrder()">Consultar pedido</button>
-    <p id="trackingResult"></p><p class="notice">Este recurso não consulta transportadoras reais.</p>
-  </div>
-</section>
+        <button type="submit">ENTRAR</button>
+      </form>
 
-<section id="conta" class="hidden">
-  <h1>Minha área</h1><div class="panel">
-    <p>Esta versão não possui contas reais nem autenticação segura. Use-a apenas para testar a navegação.</p>
-    <button onclick="showSection('inicio')">Voltar ao início</button>
-  </div>
-</section>
-</main>
-<footer>
-  <div class="logo">JEISSY MODA</div><p>Elegância em cada detalhe.</p>
-  <p class="notice">Demonstração de loja virtual. Produtos, preços, pedidos e pagamentos são ilustrativos.</p>
-  <button onclick="showSection('conta')">Minha área</button>
-</footer>
-<script>
-const products=[
-{id:1,name:"Vestido Elegance",category:"Feminino",price:189.90,icon:"♕"},
-{id:2,name:"Blusa Clássica",category:"Feminino",price:89.90,icon:"✧"},
-{id:3,name:"Conjunto Sofisticado",category:"Feminino",price:229.90,icon:"♢"},
-{id:4,name:"Camisa Premium",category:"Masculino",price:139.90,icon:"♜"},
-{id:5,name:"Calça Urbana",category:"Masculino",price:159.90,icon:"◈"},
-{id:6,name:"Jaqueta Moderna",category:"Masculino",price:279.90,icon:"✦"},
-{id:7,name:"Bolsa Dourada",category:"Acessórios",price:119.90,icon:"◇"},
-{id:8,name:"Colar Delicado",category:"Acessórios",price:49.90,icon:"✧"},
-{id:9,name:"Tênis Casual",category:"Calçados",price:199.90,icon:"◈"},
-{id:10,name:"Sapato Clássico",category:"Calçados",price:219.90,icon:"♢"}
-];
-let selectedProduct=null,cart=[],discount=false,currentOrder=null;
-const money=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
-function showSection(id){
- document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));
- const s=document.getElementById(id);if(s)s.classList.remove("hidden");
- window.scrollTo({top:0,behavior:"smooth"});
- if(id==="catalogo")renderProducts();if(id==="carrinho")renderCart();
-}
-function chooseCategory(c){showSection("catalogo");document.getElementById("category").value=c;renderProducts()}
-function renderProducts(){
- const q=(document.getElementById("search").value||"").toLowerCase(),c=document.getElementById("category").value,s=document.getElementById("sort").value;
- let list=products.filter(p=>(c==="Todos"||p.category===c)&&p.name.toLowerCase().includes(q));
- if(s==="low")list.sort((a,b)=>a.price-b.price);if(s==="high")list.sort((a,b)=>b.price-a.price);
- document.getElementById("products").innerHTML=list.map(p=>`<article class="card"><div class="art">${p.icon}</div><div class="card-body"><p class="notice">${p.category}</p><h3>${p.name}</h3><p class="price">${money(p.price)}</p><div class="actions"><button onclick="openProduct(${p.id})">Personalizar</button><button onclick="favorite(${p.id})" aria-label="Favoritar ${p.name}">♡</button></div></div></article>`).join("")||"<p>Nenhum produto encontrado.</p>";
-}
-function openProduct(id){selectedProduct=products.find(p=>p.id===id);document.getElementById("detailName").textContent=selectedProduct.name;document.getElementById("detailPrice").textContent=money(selectedProduct.price);showSection("detalhes")}
-function addToCart(){
- if(!selectedProduct)return;
- cart.push({...selectedProduct,color:document.getElementById("detailColor").value,size:document.getElementById("detailSize").value,height:document.getElementById("detailHeight").value,qty:Number(document.getElementById("detailQty").value)});
- document.getElementById("cartCount").textContent=cart.reduce((n,p)=>n+p.qty,0);showSection("carrinho");
-}
-function renderCart(){
- const box=document.getElementById("cartItems");
- box.innerHTML=cart.length?cart.map((p,i)=>`<div class="row"><div><strong>${p.name}</strong><br><span class="notice">${p.color} · Tam. ${p.size} · Qtd. ${p.qty}</span></div><div>${money(p.price*p.qty)}</div><button onclick="removeItem(${i})">Remover</button></div><hr>`).join(""):"Sua sacola está vazia.";
- const sub=cart.reduce((n,p)=>n+p.price*p.qty,0);document.getElementById("cartTotal").textContent="Total demonstrativo: "+money(discount?sub*.9:sub);
-}
-function removeItem(i){cart.splice(i,1);document.getElementById("cartCount").textContent=cart.reduce((n,p)=>n+p.qty,0);renderCart()}
-function applyCoupon(){discount=document.getElementById("coupon").value.trim().toUpperCase()==="JEISSY10";document.getElementById("couponMessage").textContent=discount?"Cupom demonstrativo de 10% aplicado!":"Cupom inválido. Experimente JEISSY10.";renderCart()}
-function favorite(id){alert(products.find(p=>p.id===id).name+" foi marcado como favorito nesta demonstração.")}
-function placeDemoOrder(){
- const msg=document.getElementById("checkoutMessage");
- if(!cart.length){msg.textContent="Adicione pelo menos um produto à sacola.";return}
- if(!document.getElementById("buyerName").value.trim()){msg.textContent="Digite um nome para identificar o pedido demonstrativo.";return}
- currentOrder="JM"+Math.floor(100000+Math.random()*900000);
- msg.textContent="Pedido demonstrativo criado: "+currentOrder+". Nenhum pagamento foi realizado.";
- document.getElementById("trackingCode").value=currentOrder;cart=[];discount=false;document.getElementById("cartCount").textContent="0";
-}
-function trackOrder(){
- const code=document.getElementById("trackingCode").value.trim().toUpperCase();
- document.getElementById("trackingResult").textContent=code&&code===currentOrder?"Pedido "+code+": recebido na demonstração. Ainda não foi enviado.":"Código não encontrado nesta sessão de demonstração.";
-}
-function previewPhoto(){
- const file=document.getElementById("photoInput").files[0],img=document.getElementById("photoPreview");if(!file)return;
- if(!file.type.startsWith("image/")){alert("Escolha um arquivo de imagem.");return}
- img.src=URL.createObjectURL(file);img.classList.remove("hidden");
-}
-renderProducts();
-</script>
+      <p>Ainda não tem conta?</p>
+      <button type="button" class="secundario"
+              data-ir="cadastro">CRIAR UMA CONTA</button>
+    </section>
+
+    <!-- 2. CADASTRO -->
+    <section id="cadastro" class="pagina">
+      <h2>Criar minha conta</h2>
+
+      <form id="form-cadastro">
+        <label for="nome-cadastro">Nome completo</label>
+        <input id="nome-cadastro" type="text" required>
+
+        <label for="usuario-cadastro">Criar nome de usuário</label>
+        <input id="usuario-cadastro" type="text" required>
+
+        <label for="email-cadastro">E-mail</label>
+        <input id="email-cadastro" type="email" required>
+
+        <label for="senha-cadastro">Criar senha</label>
+        <input id="senha-cadastro" type="password"
+               minlength="8" required>
+
+        <label for="confirmar-senha">Confirmar senha</label>
+        <input id="confirmar-senha" type="password"
+               minlength="8" required>
+
+        <button type="submit">CRIAR CONTA</button>
+      </form>
+
+      <button type="button" class="secundario"
+              data-ir="entrada">VOLTAR À ENTRADA</button>
+    </section>
+
+    <!-- 3. CATÁLOGO -->
+    <section id="catalogo" class="pagina">
+      <h2>Nossa coleção</h2>
+      <p>Escolha suas peças favoritas.</p>
+
+      <div class="categorias">
+        <button type="button" data-categoria="todos">TODOS</button>
+        <button type="button" data-categoria="feminino">FEMININO</button>
+        <button type="button" data-categoria="masculino">MASCULINO</button>
+      </div>
+
+      <div id="lista-produtos" class="produtos"></div>
+
+      <button type="button" data-ir="carrinho">
+        VER MEU CARRINHO
+      </button>
+    </section>
+
+    <!-- 4. CARRINHO -->
+    <section id="carrinho" class="pagina">
+      <h2>Meu carrinho</h2>
+
+      <div id="itens-carrinho">
+        <p>Seu carrinho está vazio.</p>
+      </div>
+
+      <h3>Total: <span id="total">R$ 0,00</span></h3>
+
+      <button type="button" data-ir="catalogo" class="secundario">
+        CONTINUAR COMPRANDO
+      </button>
+
+      <button type="button" data-ir="entrega">
+        CONTINUAR PARA ENTREGA
+      </button>
+    </section>
+
+    <!-- 5. ENDEREÇO DE ENTREGA -->
+    <section id="entrega" class="pagina">
+      <h2>Endereço de entrega</h2>
+      <p>Preencha os dados para preparar seu pedido.</p>
+
+      <form id="form-entrega">
+        <label for="nome-entrega">Nome completo</label>
+        <input id="nome-entrega" name="nome" type="text" required>
+
+        <label for="telefone-entrega">Telefone</label>
+        <input id="telefone-entrega" name="telefone"
+               type="tel" required>
+
+        <label for="cep">CEP</label>
+        <input id="cep" name="cep" type="text" required>
+
+        <label for="estado">Estado</label>
+        <input id="estado" name="estado" type="text" required>
+
+        <label for="cidade">Cidade</label>
+        <input id="cidade" name="cidade" type="text" required>
+
+        <label for="bairro">Bairro</label>
+        <input id="bairro" name="bairro" type="text" required>
+
+        <label for="rua">Rua ou avenida</label>
+        <input id="rua" name="rua" type="text" required>
+
+        <label for="numero">Número</label>
+        <input id="numero" name="numero" type="text" required>
+
+        <label for="complemento">Complemento (opcional)</label>
+        <input id="complemento" name="complemento" type="text">
+
+        <button type="submit">REVISAR PEDIDO</button>
+      </form>
+
+      <button type="button" data-ir="carrinho" class="secundario">
+        VOLTAR AO CARRINHO
+      </button>
+    </section>
+
+    <!-- 6. FINALIZAR PEDIDO -->
+    <section id="finalizar" class="pagina">
+      <h2>Finalizar pedido</h2>
+      <p>Confira seu pedido antes de continuar para o WhatsApp.</p>
+
+      <div id="resumo-pedido"></div>
+
+      <button type="button" id="botao-whatsapp">
+        ENVIAR PEDIDO PELO WHATSAPP
+      </button>
+
+      <p class="aviso">
+        O pedido só será enviado quando você confirmar a mensagem
+        no WhatsApp.
+      </p>
+
+      <button type="button" data-ir="catalogo" class="secundario">
+        VOLTAR À LOJA
+      </button>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 LUXO FASHION</p>
+    <p>Seu estilo, sua elegância.</p>
+  </footer>
+
 </body>
 </html>
