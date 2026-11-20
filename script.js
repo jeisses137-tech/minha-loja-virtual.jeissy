@@ -1,7 +1,7 @@
 
 const WHATSAPP_LOJA = "5586994454613";
 
-const produtos = [
+const produtos = [imagem: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=600&q=80",
   {
     id: 1,
     nome: "Vestido Elegante",
