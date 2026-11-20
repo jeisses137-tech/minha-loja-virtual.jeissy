@@ -15,7 +15,7 @@ const produtos = [
     nome: "Blusa Clássica",
     categoria: "feminino",
     preco: 79.90,
-   imagem: "imagens/#top_#blusas_#shein.jpeg",
+imagem: "imagens/blusa-shein.jpeg",  
     tamanhos: ["P", "M", "G", "GG"]
   },
   {
